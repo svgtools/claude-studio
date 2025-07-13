@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConversationHeader } from './ConversationHeader';
 import type { Conversation, ChatMessage } from '../types/claude-export';
 
 interface MessageViewProps {
@@ -50,14 +51,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
     return (
         <div className="flex-1 flex flex-col bg-background">
             {/* Header */}
-            <div className="bg-card border-b border-border p-4">
-                <h1 className="text-xl font-semibold text-card-foreground">
-                    {conversation.name || 'Untitled Conversation'}
-                </h1>
-                <p className="text-sm text-muted-foreground mt-1">
-                    {conversation.chat_messages.length} messages
-                </p>
-            </div>
+            <ConversationHeader conversation={conversation} />
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4">
