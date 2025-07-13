@@ -1,0 +1,69 @@
+---
+alwaysApply: true
+---
+
+## 🧠 **App Name:** `claude-studio`
+
+### 🚀 **What It Does**
+
+A **local-only CLI tool** that visualizes a **Claude AI data export** (`users.json`, `projects.json`, `conversations.json`) via a sleek React UI served from a tiny embedded HTTP server. Everything is **pre-built** and shipped as **static assets**, mirroring the pattern used by **Drizzle Studio**.
+
+---
+
+## 📂 **Expected User Folder Structure**
+
+```
+claude-export/
+├── users.json
+├── projects.json
+└── conversations.json
+```
+
+Run inside that folder:
+
+```
+npx claude-studio
+```
+
+The CLI validates the three JSON files, then opens `http://localhost:5173` (or the next free port) with the viewer.
+
+---
+
+## 🛠️ **Tech Stack & Architecture**
+
+### 🎨 **Frontend (static)**
+
+* **React 18** + **TypeScript**
+* **Vite** for dev (`vite dev`) and prod bundling (`vite build`)
+* **Tailwind CSS** for utilities
+* **shadcn/ui** for accessible primitives
+* **lucide-react** icons
+* Pure **SPA**—no server-side rendering, no dynamic routing, no pagination, no search.
+
+### 📦 **Build Artifacts**
+
+* `vite build` emits static files into `dist/client/` (≈ 100 KB gzip)
+* All CSS is purged & minified, all deps are bundled; zero external CDN calls.
+
+### 🔌 **CLI + Embedded Server**
+
+* Single entry: `bin/claude-studio.js` (published as a bin script).
+* Uses Node’s built-in `http` + `serve-static` (≈ 30 LOC) to:
+
+  1. **Serve** `dist/client/` static assets.
+  2. **Expose data**: streams `users.json`, `projects.json`, `conversations.json` at `/data/` endpoints without copying/moving files.
+* **Validation**: On start-up, read and JSON.parse each export file; report & exit on error.
+* **Auto-open**: Launches the user’s default browser via `open`/`x-open`.
+* **Zero build at runtime**: because assets are pre-compiled.
+
+### 🛠️ **Developer Workflow (for project maintainers)**
+
+* `npm run dev` – Vite dev server with HMR.
+* `npm run build` – Generates `dist/client/`.
+* `npm publish` – Package includes pre-built static assets so end-users never run a build.
+
+### 🛡️ **Constraints & Scope**
+
+* **Fully offline** – No telemetry, no network fetches beyond local host.
+* **Fail fast** – If any export file is missing or malformed, CLI aborts with a clear message.
+* **Lightweight UI**: Left sidebar listing chats; right pane shows messages. That’s it.
