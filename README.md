@@ -1,69 +1,111 @@
-# React + TypeScript + Vite
+# Claude Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **local-only CLI tool** that visualizes Claude AI data export via a sleek React UI served from a tiny embedded HTTP server.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔒 **Fully offline** - No telemetry, no external network calls
+- 📱 **Clean UI** - Built with React 18 + TypeScript + Tailwind CSS + shadcn/ui
+- 🚀 **Fast setup** - Pre-built static assets, zero build time at runtime
+- 📊 **Comprehensive view** - Browse conversations, projects, and user data
+- 🛡️ **Secure** - Data never leaves your machine
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install -g claude-studio
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Export your Claude data** from the Claude web app
+2. **Extract the export** to a folder containing:
+   ```
+   claude-export/
+   ├── users.json
+   ├── projects.json
+   └── conversations.json
+   ```
+3. **Run claude-studio** inside that folder:
+   ```bash
+   cd claude-export
+   npx claude-studio
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The tool will:
+- ✅ Validate your export files
+- 🚀 Start a local server (default: http://localhost:5173)
+- 🌐 Auto-open your browser to the viewer
+
+## What You'll See
+
+- **Left sidebar**: List of all your conversations
+- **Right pane**: Selected conversation messages
+- **Clean design**: Human messages on the right, Assistant messages on the left
+- **Message details**: Timestamps, sender info, and full content
+
+## Development
+
+### Requirements
+
+- Node.js 16+
+- npm or yarn
+
+### Setup
+
+```bash
+git clone https://github.com/your-username/claude-studio.git
+cd claude-studio
+npm install
 ```
+
+### Development Commands
+
+```bash
+# Start development server with hot reload
+npm run dev
+
+# Build for production
+npm run build
+
+# Run linter
+npm run lint
+
+# Preview built application
+npm run preview
+```
+
+### Project Structure
+
+```
+claude-studio/
+├── bin/
+│   └── claude-studio.js       # CLI entry point
+├── src/
+│   ├── components/            # React components
+│   ├── hooks/                 # Custom hooks
+│   ├── types/                 # TypeScript definitions
+│   └── App.tsx               # Main application
+├── dist/
+│   └── client/               # Built static assets
+└── package.json
+```
+
+## Architecture
+
+- **Frontend**: React 18 + TypeScript + Vite + Tailwind CSS
+- **Backend**: Node.js HTTP server with static file serving
+- **CLI**: Validates export files and starts embedded server
+- **Data**: Streams JSON files via `/data/` endpoints
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details
