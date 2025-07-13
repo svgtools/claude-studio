@@ -1,0 +1,142 @@
+[
+    {
+        "uuid": "20e589b6-f931-4131-bd7a-da630c7ddb62",
+        "name": "",
+        "created_at": "2024-03-20T17:11:54.797175Z",
+        "updated_at": "2024-03-21T20:27:10.203438Z",
+        "account": {
+            "uuid": "83861058-e02f-410d-a3bd-d92f72faab0e"
+        },
+        "chat_messages": []
+    },
+    {
+        "uuid": "1a8e32b8-2c20-4fbd-be67-b2f0333ed394",
+        "name": "Hackathon Registration Process",
+        "created_at": "2024-03-21T16:54:40.591880Z",
+        "updated_at": "2024-03-21T18:50:16.938459Z",
+        "account": {
+            "uuid": "83861058-e02f-410d-a3bd-d92f72faab0e"
+        },
+        "chat_messages": [
+            {
+                "uuid": "7a49011f-c532-4a51-9a51-f8fbb0e54ff4",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T16:54:51.158142Z",
+                        "stop_timestamp": "2024-03-21T16:54:51.158142Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "human",
+                "created_at": "2024-03-21T16:54:51.158142Z",
+                "updated_at": "2024-03-21T18:50:16.938459Z",
+                "attachments": [],
+                "files": []
+            },
+            {
+                "uuid": "c9b72f46-7fc1-47b6-aa61-17063cbb163d",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T16:54:51.158142Z",
+                        "stop_timestamp": "2024-03-21T16:54:51.158142Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "assistant",
+                "created_at": "2024-03-21T16:54:51.158142Z",
+                "updated_at": "2024-03-21T18:50:16.938459Z",
+                "attachments": [],
+                "files": []
+            },
+            {
+                "uuid": "87f1b219-e370-4f82-b72d-eab6f44e6c2e",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T18:49:54.244005Z",
+                        "stop_timestamp": "2024-03-21T18:49:54.244005Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "human",
+                "created_at": "2024-03-21T18:49:54.244005Z",
+                "updated_at": "2024-03-21T18:50:16.938459Z",
+                "attachments": [],
+                "files": []
+            },
+            {
+                "uuid": "cfd3a58d-7b1e-4262-9d9d-284fcbda5bd7",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T18:49:54.244005Z",
+                        "stop_timestamp": "2024-03-21T18:49:54.244005Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "assistant",
+                "created_at": "2024-03-21T18:49:54.244005Z",
+                "updated_at": "2024-03-21T18:50:16.938459Z",
+                "attachments": [],
+                "files": []
+            }
+        ]
+    },
+    {
+        "uuid": "2419b365-b851-4d4f-8ff4-b71a07ef5cd6",
+        "name": "Requesting Admission to College Program with Alternative Credentials",
+        "created_at": "2024-03-21T20:15:28.043177Z",
+        "updated_at": "2024-03-21T20:27:05.810253Z",
+        "account": {
+            "uuid": "83861058-e02f-410d-a3bd-d92f72faab0e"
+        },
+        "chat_messages": [
+            {
+                "uuid": "6e6d6e68-64e5-45c3-9a29-e14e64b5a3cf",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T20:15:30.594902Z",
+                        "stop_timestamp": "2024-03-21T20:15:30.594902Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "human",
+                "created_at": "2024-03-21T20:15:30.594902Z",
+                "updated_at": "2024-03-21T20:27:05.810253Z",
+                "attachments": [],
+                "files": []
+            },
+            {
+                "uuid": "b3d0ec5a-afa2-4514-9996-328e4fbc263f",
+                "text": "",
+                "content": [
+                    {
+                        "start_timestamp": "2024-03-21T20:15:30.594902Z",
+                        "stop_timestamp": "2024-03-21T20:15:30.594902Z",
+                        "type": "text",
+                        "text": "",
+                        "citations": []
+                    }
+                ],
+                "sender": "assistant",
+                "created_at": "2024-03-21T20:15:30.594902Z",
+                "updated_at": "2024-03-21T20:27:05.810253Z",
+                "attachments": [],
+                "files": []
+            }
+        ]
+    }
+]
