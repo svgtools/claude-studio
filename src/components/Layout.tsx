@@ -1,19 +1,32 @@
 import React from 'react';
 
 interface LayoutProps {
-    sidebar: React.ReactNode;
+    header?: React.ReactNode;
+    sidebar?: React.ReactNode;
     children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ sidebar, children }) => {
+export const Layout: React.FC<LayoutProps> = ({ header, sidebar, children }) => {
     return (
-        <div className="flex h-screen bg-background">
-            {/* Sidebar */}
-            {sidebar}
+        <div className="flex flex-col min-h-screen bg-background">
+            {/* Header */}
+            {header && header}
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col">
-                {children}
+            {/* Content area */}
+            <div className="flex flex-1 overflow-hidden">
+                {/* Sidebar (Conversation list) */}
+                {sidebar && (
+                    <aside className="w-64 border-r border-border overflow-y-auto bg-sidebar text-sidebar-foreground">
+                        {sidebar}
+                    </aside>
+                )}
+
+                {/* Main Content */}
+                <main className="flex-1 flex justify-center overflow-y-auto">
+                    <div className="w-full max-w-4xl flex flex-col">
+                        {children}
+                    </div>
+                </main>
             </div>
         </div>
     );

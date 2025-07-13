@@ -1,13 +1,6 @@
 import React from 'react';
 import type { Conversation } from '../types/claude-export';
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarMenu,
-    SidebarMenuItem,
-    SidebarMenuButton,
-    SidebarTrigger,
-} from './ui/sidebar';
+import { cn } from "@/lib/utils";
 
 interface ConversationListProps {
     conversations: Conversation[];
@@ -18,38 +11,33 @@ interface ConversationListProps {
 export const ConversationList: React.FC<ConversationListProps> = ({
     conversations,
     selectedConversationId,
-    onConversationSelect
+    onConversationSelect,
 }) => {
     return (
-        <>
-            <SidebarTrigger className="absolute left-4 top-4 md:hidden" />
-            <Sidebar>
-                <SidebarContent>
-                    <SidebarMenu>
-                        {conversations.map((conversation) => (
-                            <SidebarMenuItem key={conversation.uuid}>
-                                <SidebarMenuButton
-                                    isActive={selectedConversationId === conversation.uuid}
-                                    onClick={() => onConversationSelect(conversation.uuid)}
-                                    className="w-full"
-                                >
-                                    <div className="flex-1 min-w-0">
-                                        <h3 className="text-sm font-medium text-sidebar-foreground truncate">
-                                            {conversation.name || 'Untitled Conversation'}
-                                        </h3>
-                                    </div>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
+        <div className="overflow-y-auto bg-sidebar text-sidebar-foreground">
+            <ul className="divide-y divide-border">
+                {conversations.map((conversation) => (
+                    <li key={conversation.uuid}>
+                        <button
+                            className={cn(
+                                'w-full text-left px-4 py-3 text-sm truncate transition-colors',
+                                selectedConversationId === conversation.uuid
+                                    ? 'bg-muted text-foreground'
+                                    : 'hover:bg-muted/60'
+                            )}
+                            onClick={() => onConversationSelect(conversation.uuid)}
+                        >
+                            {conversation.name || 'Untitled Conversation'}
+                        </button>
+                    </li>
+                ))}
 
-                        {conversations.length === 0 && (
-                            <div className="p-4 text-center text-muted-foreground">
-                                No conversations found
-                            </div>
-                        )}
-                    </SidebarMenu>
-                </SidebarContent>
-            </Sidebar>
-        </>
+                {conversations.length === 0 && (
+                    <li className="p-4 text-center text-muted-foreground">
+                        No conversations found
+                    </li>
+                )}
+            </ul>
+        </div>
     );
 }; 
