@@ -1,5 +1,13 @@
 import React from 'react';
 import type { Conversation } from '../types/claude-export';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarMenu,
+    SidebarMenuItem,
+    SidebarMenuButton,
+    SidebarTrigger,
+} from './ui/sidebar';
 
 interface ConversationListProps {
     conversations: Conversation[];
@@ -13,37 +21,35 @@ export const ConversationList: React.FC<ConversationListProps> = ({
     onConversationSelect
 }) => {
     return (
-        <div className="flex flex-col h-full">
-            <div className="p-4 border-b border-sidebar-border">
-                <h2 className="text-lg font-semibold text-sidebar-foreground">Conversations</h2>
-                <p className="text-sm text-muted-foreground">{conversations.length} conversations</p>
-            </div>
+        <>
+            <SidebarTrigger className="absolute left-4 top-4 md:hidden" />
+            <Sidebar>
+                <SidebarContent>
+                    <SidebarMenu>
+                        {conversations.map((conversation) => (
+                            <SidebarMenuItem key={conversation.uuid}>
+                                <SidebarMenuButton
+                                    isActive={selectedConversationId === conversation.uuid}
+                                    onClick={() => onConversationSelect(conversation.uuid)}
+                                    className="w-full"
+                                >
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="text-sm font-medium text-sidebar-foreground truncate">
+                                            {conversation.name || 'Untitled Conversation'}
+                                        </h3>
+                                    </div>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        ))}
 
-            <div className="flex-1 overflow-y-auto">
-                {conversations.map((conversation) => (
-                    <div
-                        key={conversation.uuid}
-                        className={`p-3 border-b border-sidebar-border cursor-pointer hover:bg-sidebar-accent ${selectedConversationId === conversation.uuid ? 'bg-sidebar-accent border-sidebar-primary' : ''
-                            }`}
-                        onClick={() => onConversationSelect(conversation.uuid)}
-                    >
-                        <div className="flex-1 min-w-0">
-                            <h3 className="text-sm font-medium text-sidebar-foreground truncate">
-                                {conversation.name || 'Untitled Conversation'}
-                            </h3>
-                            <p className="text-xs text-muted-foreground mt-1">
-                                {conversation.chat_messages.length} messages
-                            </p>
-                        </div>
-                    </div>
-                ))}
-
-                {conversations.length === 0 && (
-                    <div className="p-4 text-center text-muted-foreground">
-                        No conversations found
-                    </div>
-                )}
-            </div>
-        </div>
+                        {conversations.length === 0 && (
+                            <div className="p-4 text-center text-muted-foreground">
+                                No conversations found
+                            </div>
+                        )}
+                    </SidebarMenu>
+                </SidebarContent>
+            </Sidebar>
+        </>
     );
 }; 

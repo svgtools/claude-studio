@@ -4,6 +4,7 @@ import { ConversationList } from './components/ConversationList';
 import { MessageView } from './components/MessageView';
 import { useClaudeData } from './hooks/useClaudeData';
 import { Button } from './components/ui/button';
+import { SidebarProvider } from './components/ui/sidebar';
 
 function App() {
   const { data, loading, error } = useClaudeData();
@@ -54,17 +55,19 @@ function App() {
     : null;
 
   return (
-    <Layout
-      sidebar={
-        <ConversationList
-          conversations={data.conversations}
-          selectedConversationId={selectedConversationId}
-          onConversationSelect={setSelectedConversationId}
-        />
-      }
-    >
-      <MessageView conversation={selectedConversation} />
-    </Layout>
+    <SidebarProvider defaultOpen={true}>
+      <Layout
+        sidebar={
+          <ConversationList
+            conversations={data.conversations}
+            selectedConversationId={selectedConversationId}
+            onConversationSelect={setSelectedConversationId}
+          />
+        }
+      >
+        <MessageView conversation={selectedConversation} />
+      </Layout>
+    </SidebarProvider>
   );
 }
 
