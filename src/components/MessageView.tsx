@@ -6,22 +6,6 @@ interface MessageViewProps {
 }
 
 export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
-    const formatTime = (dateString: string) => {
-        return new Date(dateString).toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
-
     const renderMessage = (message: ChatMessage) => {
         const isHuman = message.sender === 'human';
         const content = message.content.map(c => c.text).join('') || message.text;
@@ -29,38 +13,20 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
         return (
             <div
                 key={message.uuid}
-                className={`mb-6 flex ${isHuman ? 'justify-end' : 'justify-start'}`}
+                className="mb-6 flex justify-center"
             >
-                <div
-                    className={`max-w-3xl rounded-lg p-4 ${isHuman
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-card border border-border text-card-foreground'
-                        }`}
-                >
-                    <div className="flex items-start space-x-2">
-                        <div className="flex-shrink-0">
-                            <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${isHuman
-                                ? 'bg-primary-foreground text-primary'
-                                : 'bg-muted text-muted-foreground'
-                                }`}>
-                                {isHuman ? 'H' : 'A'}
-                            </div>
-                        </div>
-                        <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-1">
-                                <span className="text-sm font-medium">
-                                    {isHuman ? 'Human' : 'Assistant'}
-                                </span>
-                                <span className={`text-xs ${isHuman ? 'text-primary-foreground/70' : 'text-muted-foreground'
-                                    }`}>
-                                    {formatTime(message.created_at)}
-                                </span>
-                            </div>
+                <div className="max-w-4xl w-full">
+                    {isHuman ? (
+                        <div className="bg-card border border-border text-card-foreground rounded-lg p-4">
                             <div className="text-sm whitespace-pre-wrap">
                                 {content || <em className="text-muted-foreground">No content</em>}
                             </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className="text-sm whitespace-pre-wrap text-foreground">
+                            {content || <em className="text-muted-foreground">No content</em>}
+                        </div>
+                    )}
                 </div>
             </div>
         );
@@ -89,7 +55,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
                     {conversation.name || 'Untitled Conversation'}
                 </h1>
                 <p className="text-sm text-muted-foreground mt-1">
-                    {formatDate(conversation.created_at)} • {conversation.chat_messages.length} messages
+                    {conversation.chat_messages.length} messages
                 </p>
             </div>
 
