@@ -14,6 +14,10 @@ const __dirname = path.dirname(__filename);
 const REQUIRED_FILES = ['users.json', 'projects.json', 'conversations.json'];
 const DEFAULT_PORT = 5173;
 
+// Parse command line arguments
+const args = process.argv.slice(2);
+const shouldSkipBrowser = args.includes('--no-open') || args.includes('--skip-browser');
+
 function validateExportFiles() {
     console.log('🔍 Validating Claude export files...');
 
@@ -96,23 +100,27 @@ function createServer(port) {
         console.log('📁 Serving Claude export data from current directory');
         console.log('Press Ctrl+C to stop the server\n');
 
-            // Auto-open browser
-    const url = `http://localhost:${port}`;
-    const platform = process.platform;
-    let command, args;
-    
-    if (platform === 'darwin') {
-      command = 'open';
-      args = [url];
-    } else if (platform === 'win32') {
-      command = 'cmd';
-      args = ['/c', 'start', url];
-    } else {
-      command = 'xdg-open';
-      args = [url];
-    }
-    
-    spawn(command, args, { stdio: 'ignore', detached: true }).unref();
+        // Auto-open browser (unless disabled)
+        if (!shouldSkipBrowser) {
+            const url = `http://localhost:${port}`;
+            const platform = process.platform;
+            let command, args;
+
+            if (platform === 'darwin') {
+                command = 'open';
+                args = [url];
+            } else if (platform === 'win32') {
+                command = 'cmd';
+                args = ['/c', 'start', url];
+            } else {
+                command = 'xdg-open';
+                args = [url];
+            }
+
+            spawn(command, args, { stdio: 'ignore', detached: true }).unref();
+        } else {
+            console.log('🌐 Browser auto-open disabled. Visit the URL above manually.');
+        }
     });
 
     return server;
