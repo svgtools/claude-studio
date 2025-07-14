@@ -4,7 +4,7 @@ import { ConversationList } from './components/ConversationList';
 import { MessageView } from './components/MessageView';
 import { useClaudeData } from './hooks/useClaudeData';
 import { Button } from './components/ui/button';
-import { ConversationHeader } from './components/ConversationHeader';
+import { ConversationHeader } from './components/Header';
 
 function App() {
   const { data, loading, error } = useClaudeData();
