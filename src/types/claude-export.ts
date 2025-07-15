@@ -44,7 +44,7 @@ export interface ChatMessage {
   files: any[];
 }
 
-export interface Conversation {
+export interface Chat {
   uuid: string;
   name: string;
   created_at: string;
@@ -58,5 +58,5 @@ export interface Conversation {
 export interface ClaudeExportData {
   users: User[];
   projects: Project[];
-  conversations: Conversation[];
+  chats: Chat[];
 } 

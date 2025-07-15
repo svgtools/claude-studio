@@ -1,17 +1,17 @@
 import React from 'react';
-import type { Conversation } from '../types/claude-export';
+import type { Chat } from '../types/claude-export';
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-interface ConversationHeaderProps {
-    conversation: Conversation;
+interface ChatHeaderProps {
+    chat: Chat;
 }
 
-export const ConversationHeader: React.FC<ConversationHeaderProps> = ({ conversation }) => {
+export const ChatHeader: React.FC<ChatHeaderProps> = ({ chat }) => {
     return (
         <header className="bg-card border-b border-border h-12 flex items-center px-4 gap-3">
             <SidebarTrigger />
             <h1 className="text-base font-semibold text-card-foreground truncate">
-                {conversation.name || 'Untitled Conversation'}
+                {chat.name || 'Untitled Chat'}
             </h1>
         </header>
     );

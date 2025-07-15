@@ -4,11 +4,11 @@ import { MessageView } from './components/MessageView';
 import { useClaudeData } from './hooks/useClaudeData';
 import { Layout } from './components/Layout';
 import { Button } from './components/ui/button';
-import { ConversationHeader } from './components/Header';
+import { ChatHeader } from './components/Header';
 
 function App() {
   const { data, loading, error } = useClaudeData();
-  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
 
   if (loading) {
     return (
@@ -50,26 +50,26 @@ function App() {
     );
   }
 
-  const selectedConversation = selectedConversationId
-    ? data.conversations.find(c => c.uuid === selectedConversationId) || null
+  const selectedChat = selectedChatId
+    ? data.chats.find(c => c.uuid === selectedChatId) || null
     : null;
 
   return (
     <Layout
       header={
-        selectedConversation && (
-          <ConversationHeader conversation={selectedConversation} />
+        selectedChat && (
+          <ChatHeader chat={selectedChat} />
         )
       }
       sidebar={
         <AppSidebar
-          conversations={data.conversations}
-          selectedConversationId={selectedConversationId}
-          onConversationSelect={setSelectedConversationId}
+          chats={data.chats}
+          selectedChatId={selectedChatId}
+          onChatSelect={setSelectedChatId}
         />
       }
     >
-      <MessageView conversation={selectedConversation} />
+      <MessageView chat={selectedChat} />
     </Layout>
   );
 }
