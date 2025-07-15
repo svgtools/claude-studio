@@ -48,7 +48,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
 
                     {selectedView === "chats" && (
                         <>
-                            <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+                            <SidebarGroupLabel>Chats</SidebarGroupLabel>
                             <SidebarGroupContent>
                                 <SidebarMenu>
                                     {conversations.map((conversation) => (
@@ -61,7 +61,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
                                                     className="w-full text-left truncate"
                                                     onClick={() => onConversationSelect(conversation.uuid)}
                                                 >
-                                                    {conversation.name || 'Untitled Conversation'}
+                                                    {conversation.name || 'Untitled Chat'}
                                                 </button>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>
@@ -70,7 +70,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
                                     {conversations.length === 0 && (
                                         <SidebarMenuItem>
                                             <div className="px-2 py-3 text-center text-muted-foreground">
-                                                No conversations found
+                                                No Chats found
                                             </div>
                                         </SidebarMenuItem>
                                     )}
