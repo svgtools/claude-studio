@@ -70,4 +70,5 @@ The CLI validates the three JSON files, then opens `http://localhost:5173` (or t
 *   **Fail fast** – If any export file is missing or malformed, CLI aborts with a clear message.
 *   **Lightweight UI**: Left sidebar listing chats; right pane shows messages. That’s it.
 *   **Dark theme only** – App runs in dark mode by default using semantic color tokens instead of hardcoded colors
+*   **Future features** - ABSOLUTELY NO FILTERING/SEARCH/METADATA DISPLAY WILL EVER BE IMPLEMENTED NOW OR IN THE FUTURE.
 

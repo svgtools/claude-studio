@@ -2,13 +2,13 @@ import React from 'react';
 import type { Conversation } from '../types/claude-export';
 import { cn } from "@/lib/utils";
 
-interface ConversationListProps {
+interface AppSidebarProps {
     conversations: Conversation[];
     selectedConversationId: string | null;
     onConversationSelect: (conversationId: string) => void;
 }
 
-export const ConversationList: React.FC<ConversationListProps> = ({
+export const AppSidebar: React.FC<AppSidebarProps> = ({
     conversations,
     selectedConversationId,
     onConversationSelect,

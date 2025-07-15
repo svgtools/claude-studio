@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Layout } from './components/Layout';
-import { ConversationList } from './components/ConversationList';
+import { AppSidebar } from './components/AppSidebar';
 import { MessageView } from './components/MessageView';
 import { useClaudeData } from './hooks/useClaudeData';
+import { Layout } from './components/Layout';
 import { Button } from './components/ui/button';
 import { ConversationHeader } from './components/Header';
 
@@ -62,7 +62,7 @@ function App() {
         )
       }
       sidebar={
-        <ConversationList
+        <AppSidebar
           conversations={data.conversations}
           selectedConversationId={selectedConversationId}
           onConversationSelect={setSelectedConversationId}
