@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Conversation } from '../types/claude-export';
 import {
     Sidebar,
@@ -10,6 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 interface AppSidebarProps {
     conversations: Conversation[];
@@ -22,38 +23,75 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
     selectedConversationId,
     onConversationSelect,
 }) => {
+    const [selectedView, setSelectedView] = useState<string>("chats");
+
     return (
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Conversations</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {conversations.map((conversation) => (
-                                <SidebarMenuItem key={conversation.uuid}>
-                                    <SidebarMenuButton
-                                        asChild
-                                        isActive={selectedConversationId === conversation.uuid}
-                                    >
-                                        <button
-                                            className="w-full text-left truncate"
-                                            onClick={() => onConversationSelect(conversation.uuid)}
-                                        >
-                                            {conversation.name || 'Untitled Conversation'}
-                                        </button>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
+                    <div className="p-2">
+                        <ToggleGroup
+                            type="single"
+                            value={selectedView}
+                            onValueChange={(value) => value && setSelectedView(value)}
+                            className="w-full"
+                        >
+                            <ToggleGroupItem value="chats" className="flex-1">
+                                Chats
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="projects" className="flex-1">
+                                Projects
+                            </ToggleGroupItem>
+                        </ToggleGroup>
+                    </div>
 
-                            {conversations.length === 0 && (
-                                <SidebarMenuItem>
-                                    <div className="px-2 py-3 text-center text-muted-foreground">
-                                        No conversations found
-                                    </div>
-                                </SidebarMenuItem>
-                            )}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
+                    {selectedView === "chats" && (
+                        <>
+                            <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    {conversations.map((conversation) => (
+                                        <SidebarMenuItem key={conversation.uuid}>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={selectedConversationId === conversation.uuid}
+                                            >
+                                                <button
+                                                    className="w-full text-left truncate"
+                                                    onClick={() => onConversationSelect(conversation.uuid)}
+                                                >
+                                                    {conversation.name || 'Untitled Conversation'}
+                                                </button>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    ))}
+
+                                    {conversations.length === 0 && (
+                                        <SidebarMenuItem>
+                                            <div className="px-2 py-3 text-center text-muted-foreground">
+                                                No conversations found
+                                            </div>
+                                        </SidebarMenuItem>
+                                    )}
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </>
+                    )}
+
+                    {selectedView === "projects" && (
+                        <>
+                            <SidebarGroupLabel>Projects</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    <SidebarMenuItem>
+                                        <div className="px-2 py-3 text-center text-muted-foreground">
+                                            Projects functionality coming soon
+                                        </div>
+                                    </SidebarMenuItem>
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </>
+                    )}
                 </SidebarGroup>
             </SidebarContent>
         </Sidebar>
