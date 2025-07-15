@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Chat } from '../types/claude-export';
+import type { Conversation } from '../types/claude-export';
 import {
     Sidebar,
     SidebarContent,
@@ -12,43 +12,43 @@ import {
 } from "@/components/ui/sidebar";
 
 interface AppSidebarProps {
-    chats: Chat[];
-    selectedChatId: string | null;
-    onChatSelect: (chatId: string) => void;
+    conversations: Conversation[];
+    selectedConversationId: string | null;
+    onConversationSelect: (conversationId: string) => void;
 }
 
 export const AppSidebar: React.FC<AppSidebarProps> = ({
-    chats,
-    selectedChatId,
-    onChatSelect,
+    conversations,
+    selectedConversationId,
+    onConversationSelect,
 }) => {
     return (
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Chats</SidebarGroupLabel>
+                    <SidebarGroupLabel>Conversations</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {chats.map((chat) => (
-                                <SidebarMenuItem key={chat.uuid}>
+                            {conversations.map((conversation) => (
+                                <SidebarMenuItem key={conversation.uuid}>
                                     <SidebarMenuButton
                                         asChild
-                                        isActive={selectedChatId === chat.uuid}
+                                        isActive={selectedConversationId === conversation.uuid}
                                     >
                                         <button
                                             className="w-full text-left truncate"
-                                            onClick={() => onChatSelect(chat.uuid)}
+                                            onClick={() => onConversationSelect(conversation.uuid)}
                                         >
-                                            {chat.name || 'Untitled Chat'}
+                                            {conversation.name || 'Untitled Conversation'}
                                         </button>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
 
-                            {chats.length === 0 && (
+                            {conversations.length === 0 && (
                                 <SidebarMenuItem>
                                     <div className="px-2 py-3 text-center text-muted-foreground">
-                                        No chats found
+                                        No conversations found
                                     </div>
                                 </SidebarMenuItem>
                             )}

@@ -1,12 +1,12 @@
 import React from 'react';
-import type { Chat, ChatMessage } from '../types/claude-export';
+import type { Conversation, ChatMessage } from '../types/claude-export';
 import { MessageSquareDashed } from 'lucide-react';
 
 interface MessageViewProps {
-    chat: Chat | null;
+    conversation: Conversation | null;
 }
 
-export const MessageView: React.FC<MessageViewProps> = ({ chat }) => {
+export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
     const renderMessage = (message: ChatMessage) => {
         const isHuman = message.sender === 'human';
         const content = message.content.map(c => c.text).join('') || message.text;
@@ -33,7 +33,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ chat }) => {
         );
     };
 
-    if (!chat) {
+    if (!conversation) {
         return (
             <div className="flex-1 flex items-center justify-center bg-background">
                 <div className="text-center">
@@ -42,7 +42,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ chat }) => {
                             <MessageSquareDashed className="w-16 h-16 mx-auto text-muted-foreground" />
                         </span>
                     </div>
-                    <p className="text-muted-foreground">Select a chat to view messages</p>
+                    <p className="text-muted-foreground">Select a conversation to view messages</p>
                 </div>
             </div>
         );
@@ -52,12 +52,12 @@ export const MessageView: React.FC<MessageViewProps> = ({ chat }) => {
         <div className="flex-1 flex flex-col bg-background">
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4">
-                {chat.chat_messages.length === 0 ? (
+                {conversation.chat_messages.length === 0 ? (
                     <div className="text-center text-muted-foreground mt-8">
-                        No messages in this chat
+                        No messages in this conversation
                     </div>
                 ) : (
-                    chat.chat_messages.map(renderMessage)
+                    conversation.chat_messages.map(renderMessage)
                 )}
             </div>
         </div>
