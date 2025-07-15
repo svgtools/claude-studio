@@ -29,17 +29,18 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <div className="p-2">
+                    <div className="px-4 py-2 flex justify-center">
                         <ToggleGroup
                             type="single"
                             value={selectedView}
                             onValueChange={(value) => value && setSelectedView(value)}
-                            className="w-full"
+                            className="grid grid-cols-2 w-32 h-7"
+                            size="sm"
                         >
-                            <ToggleGroupItem value="chats" className="flex-1">
+                            <ToggleGroupItem value="chats" className="text-xs h-6 px-1 py-0">
                                 Chats
                             </ToggleGroupItem>
-                            <ToggleGroupItem value="projects" className="flex-1">
+                            <ToggleGroupItem value="projects" className="text-xs h-6 px-1 py-0">
                                 Projects
                             </ToggleGroupItem>
                         </ToggleGroup>
