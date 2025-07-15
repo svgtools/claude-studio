@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppSidebar } from './components/AppSidebar';
 import { MessageView } from './components/MessageView';
 import { useClaudeData } from './hooks/useClaudeData';
@@ -9,6 +9,13 @@ import { ConversationHeader } from './components/Header';
 function App() {
   const { data, loading, error } = useClaudeData();
   const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+
+  // Automatically select the first conversation when data loads
+  useEffect(() => {
+    if (data && data.conversations.length > 0 && !selectedConversationId) {
+      setSelectedConversationId(data.conversations[0].uuid);
+    }
+  }, [data, selectedConversationId]);
 
   if (loading) {
     return (
