@@ -1,4 +1,5 @@
 import React from 'react';
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 
 interface LayoutProps {
     header: React.ReactNode;
@@ -8,24 +9,22 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ header, sidebar, children }) => {
     return (
-        <div className="flex flex-col min-h-screen bg-background">
-            {/* Header */}
-            {header}
+        <SidebarProvider>
+            {/* Sidebar */}
+            {sidebar}
 
-            {/* Content area */}
-            <div className="flex flex-1 overflow-hidden">
-                {/* Sidebar (Conversation list) */}
-                <div className="w-64 border-r border-border overflow-y-auto bg-sidebar text-sidebar-foreground">
-                    {sidebar}
-                </div>
+            {/* Main content area with header and content */}
+            <SidebarInset className="min-h-screen">
+                {/* Header */}
+                {header}
 
                 {/* Main Content */}
-                <main className="flex-1 flex justify-center overflow-y-auto">
-                    <div className="w-full max-w-4xl flex flex-col">
+                <main className="flex-1 overflow-y-auto">
+                    <div className="w-full max-w-4xl mx-auto">
                         {children}
                     </div>
                 </main>
-            </div>
-        </div>
+            </SidebarInset>
+        </SidebarProvider>
     );
 }; 

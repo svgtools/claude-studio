@@ -1,6 +1,15 @@
 import React from 'react';
 import type { Conversation } from '../types/claude-export';
-import { cn } from "@/lib/utils";
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar";
 
 interface AppSidebarProps {
     conversations: Conversation[];
@@ -14,30 +23,39 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
     onConversationSelect,
 }) => {
     return (
-        <div className="overflow-y-auto bg-sidebar text-sidebar-foreground">
-            <ul className="divide-y divide-border">
-                {conversations.map((conversation) => (
-                    <li key={conversation.uuid}>
-                        <button
-                            className={cn(
-                                'w-full text-left px-4 py-3 text-sm truncate transition-colors',
-                                selectedConversationId === conversation.uuid
-                                    ? 'bg-muted text-foreground'
-                                    : 'hover:bg-muted/60'
-                            )}
-                            onClick={() => onConversationSelect(conversation.uuid)}
-                        >
-                            {conversation.name || 'Untitled Conversation'}
-                        </button>
-                    </li>
-                ))}
+        <Sidebar>
+            <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {conversations.map((conversation) => (
+                                <SidebarMenuItem key={conversation.uuid}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={selectedConversationId === conversation.uuid}
+                                    >
+                                        <button
+                                            className="w-full text-left truncate"
+                                            onClick={() => onConversationSelect(conversation.uuid)}
+                                        >
+                                            {conversation.name || 'Untitled Conversation'}
+                                        </button>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
 
-                {conversations.length === 0 && (
-                    <li className="p-4 text-center text-muted-foreground">
-                        No conversations found
-                    </li>
-                )}
-            </ul>
-        </div>
+                            {conversations.length === 0 && (
+                                <SidebarMenuItem>
+                                    <div className="px-2 py-3 text-center text-muted-foreground">
+                                        No conversations found
+                                    </div>
+                                </SidebarMenuItem>
+                            )}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            </SidebarContent>
+        </Sidebar>
     );
 }; 
