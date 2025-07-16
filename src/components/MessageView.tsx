@@ -25,7 +25,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
                         <div className="bg-card border border-border text-card-foreground rounded-lg p-4">
                             {content ? (
                                 <div
-                                    className="prose-invert"
+                                    className="prose prose-invert prose-slate max-w-none prose-headings:text-foreground prose-p:text-card-foreground prose-a:text-blue-400 prose-strong:text-foreground prose-code:text-green-400 prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-blockquote:border-l-border prose-blockquote:text-muted-foreground prose-li:text-card-foreground"
                                     dangerouslySetInnerHTML={{ __html: htmlContent }}
                                 />
                             ) : (
@@ -36,7 +36,7 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
                         <div className="w-full">
                             {content ? (
                                 <div
-                                    className="prose-invert"
+                                    className="prose prose-invert prose-slate max-w-none prose-headings:text-foreground prose-p:text-foreground prose-a:text-blue-400 prose-strong:text-foreground prose-code:text-green-400 prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-blockquote:border-l-border prose-blockquote:text-muted-foreground prose-li:text-foreground prose-ul:text-foreground prose-ol:text-foreground"
                                     dangerouslySetInnerHTML={{ __html: htmlContent }}
                                 />
                             ) : (
