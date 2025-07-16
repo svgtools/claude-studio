@@ -1,4 +1,5 @@
 import React from 'react';
+import { marked } from 'marked';
 import type { Conversation, ChatMessage } from '../types/claude-export';
 import { MessageSquareDashed } from 'lucide-react';
 
@@ -11,6 +12,9 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
         const isHuman = message.sender === 'human';
         const content = message.content.map(c => c.text).join('') || message.text;
 
+        // Parse markdown content to HTML
+        const htmlContent = content ? marked.parse(content) : '';
+
         return (
             <div
                 key={message.uuid}
@@ -19,13 +23,25 @@ export const MessageView: React.FC<MessageViewProps> = ({ conversation }) => {
                 <div className="max-w-4xl w-full">
                     {isHuman ? (
                         <div className="bg-card border border-border text-card-foreground rounded-lg p-4">
-                            <div className="text-sm whitespace-pre-wrap">
-                                {content || <em className="text-muted-foreground">No content</em>}
-                            </div>
+                            {content ? (
+                                <div
+                                    className="prose-invert"
+                                    dangerouslySetInnerHTML={{ __html: htmlContent }}
+                                />
+                            ) : (
+                                <em className="text-muted-foreground">No content</em>
+                            )}
                         </div>
                     ) : (
-                        <div className="text-sm whitespace-pre-wrap text-foreground">
-                            {content || <em className="text-muted-foreground">No content</em>}
+                        <div className="w-full">
+                            {content ? (
+                                <div
+                                    className="prose-invert"
+                                    dangerouslySetInnerHTML={{ __html: htmlContent }}
+                                />
+                            ) : (
+                                <em className="text-muted-foreground">No content</em>
+                            )}
                         </div>
                     )}
                 </div>
